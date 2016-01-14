@@ -1,0 +1,35 @@
+<md-dialog aria-label="ProguardWeb Configuration"  ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>ProguardWeb Configuration</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2>Configure Paths</h2>
+        <md-input-container class="md-block">
+          <label>Path to Android SDK</label>
+          <input ng-model="config.path_sdk">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Path to proguard mappings</label>
+          <input ng-model="config.path_mapping">
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer('Save')">
+       Save
+      </md-button>
+      <md-button ng-click="answer('Cancel')" style="margin-right:20px;">
+        Cancel
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
