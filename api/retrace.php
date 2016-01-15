@@ -1,4 +1,4 @@
-<?
+<?php
     // Get Input JSON
     $data = json_decode(file_get_contents('php://input'), true);
 
@@ -23,7 +23,4 @@
     $res_array = array ( "retrace_output" => $res_out , "return_code" => $return_var );
     $res_json = json_encode($res_array);
     echo $res_json;
-?>
-
-
 ?>
