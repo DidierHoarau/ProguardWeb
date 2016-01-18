@@ -1,11 +1,11 @@
-<md-dialog aria-label="ProguardWeb Configuration"  ng-cloak>
+<md-dialog aria-label="ProguardWeb Configuration" ng-controller="AppConfigCtrl" ng-cloak>
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>ProguardWeb Configuration</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+          <md-icon md-svg-src="assets/svg/ic_close_black_24px.svg" aria-label="Close dialog"></md-icon>
         </md-button>
       </div>
     </md-toolbar>
@@ -14,17 +14,17 @@
         <h2>Configure Paths</h2>
         <md-input-container class="md-block">
           <label>Path to Android SDK</label>
-          <input ng-model="config.path_sdk">
+          <input ng-model="config.sdk_path">
         </md-input-container>
         <md-input-container class="md-block">
           <label>Path to proguard mappings</label>
-          <input ng-model="config.path_mapping">
+          <input ng-model="config.mapping_path ">
         </md-input-container>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
       <span flex></span>
-      <md-button ng-click="answer('Save')">
+      <md-button ng-click="saveConfig();">
        Save
       </md-button>
       <md-button ng-click="answer('Cancel')" style="margin-right:20px;">

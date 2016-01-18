@@ -23,50 +23,57 @@
 
   </head>
 
-  <body ng-app="ProguardWebApp" layout="row" ng-controller="Trace" ng-cloak class="ProguardWebAppBody">
+  <body ng-app="ProguardWebApp" layout="row" ng-controller="TraceCtrl" ng-cloak class="ProguardWebAppBody">
 
 
-  <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+  <md-content flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2" layout-fill>
 
     <!-- Title and toolbar -->
 
-    <md-toolbar>
+    <md-toolbar id="toolbar">
       <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Settings">
-          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-        </md-button>
         <h1>
           <span>Proguard Web Retrace</span>
         </h1>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="Favorite">
-          <md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>
-        </md-button>
-        <md-button ng-controller="AppConfig" class="md-icon-button" aria-label="More" ng-click="showAdvanced()">
+        <md-button ng-controller="AppConfigCtrl" class="md-icon-button" aria-label="More" ng-click="showAdvanced()">
           <md-icon md-svg-icon="config"></md-icon>
         </md-button>
       </div>
     </md-toolbar>
 
-    <md-content flex id="content">
-
+    <div id="content_inside">
       <!-- Re-Trace parameters -->
+
+      <h3>Trace Input</h3>
 
       <md-input-container class="md-block">
         <label>Application</label>
-        <md-select ng-model="param.targetapp">
-          <md-option value="{{targetapp}}">{{targetapp}}</md-option>
+        <md-select ng-model="app" ng-change="reset_output();">
+          <md-option ng-repeat="app in appList" value="{{app}}">{{app}}</md-option>
         </md-select>
       </md-input-container>
-
       <md-input-container class="md-block">
         <label>Trace</label>
-        <textarea ng-model="param.trace" columns="1" rows="10" style="font-family: monospace;"></textarea>
+        <textarea ng-model="param.trace" columns="1" rows="8" style="font-family: monospace;" ng-change="reset_output();"></textarea>
       </md-input-container>
 
-    </md-content>
+      <div layout="row" layout-align="end">
+        <md-button ng-click="retrace();"> Retrace </md-button>
+      </div>
 
-  </div>
+      <div ng-show="result.show">
+        <h3>Retrace Output</h3>
+        <md-progress-circular md-mode="indeterminate" ng-show="result.processing"></md-progress-circular>
+        <md-input-container class="md-block">
+          <label>Output</label>
+        <textarea ng-model="result.output" columns="1" rows="10" style="font-family: monospace;"></textarea>
+        </md-input-container>
+      </div>
+
+    </div>
+
+  </md-content>
 
   <script src="./bower_components/angular/angular.js"></script>
   <script src="./bower_components/angular-animate/angular-animate.js"></script>

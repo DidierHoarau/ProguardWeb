@@ -12,6 +12,6 @@
     // Return if success
     // TODO
     $res_array = array ( "return_code" => 0 );
-    $res_json = json_encode($res_array);
+    $res_json = json_encode($data);
     echo $res_json;
 ?>

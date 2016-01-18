@@ -1,6 +1,17 @@
 angular
 .module('config', ['ngMaterial'])
-.controller('AppConfig', function($scope, $mdDialog, $mdMedia) {
+.controller('AppConfigCtrl', ['$scope', '$mdDialog', '$mdMedia', '$http', function($scope, $mdDialog, $mdMedia, $http) {
+  // Get config
+  $scope.config = {sdk_path:"", mapping_path:""};
+  $http.get('../api/configGet.php').then(
+    function successCallback(response) {
+      $scope.config = response.data;
+    }, 
+    function errorCallback(response) {
+        // TODO
+    }
+  );
+  // Dialog
   $scope.status = '  ';
   $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
   $scope.showAdvanced = function(ev) {
@@ -12,11 +23,6 @@ angular
       targetEvent: ev,
       clickOutsideToClose:true,
       fullscreen: useFullScreen
-    })
-    .then(function(answer) {
-      $scope.status = 'You said the information was "' + answer + '".';
-    }, function() {
-      $scope.status = 'You cancelled the dialog.';
     });
     $scope.$watch(function() {
       return $mdMedia('xs') || $mdMedia('sm');
@@ -24,21 +30,21 @@ angular
       $scope.customFullscreen = (wantsFullScreen === true);
     });
   };
-  $scope.showTabDialog = function(ev) {
-    $mdDialog.show({
-      controller: DialogController,
-      templateUrl: 'tabDialog.tmpl.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true
-    })
-        .then(function(answer) {
-          $scope.status = 'You said the information was "' + answer + '".';
-        }, function() {
-          $scope.status = 'You cancelled the dialog.';
-        });
-  };
-});
+
+  // Save
+  $scope.saveConfig = function() {
+    $mdDialog.hide();
+        // Request
+        $http.post('../api/configUpdate.php', $scope.config).then(
+            function successCallback(response) {
+            }, 
+            function errorCallback(response) {
+              // TODO
+            }
+        );
+  }
+
+}]);
 function DialogController($scope, $mdDialog) {
   $scope.hide = function() {
     $mdDialog.hide();

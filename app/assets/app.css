@@ -6,22 +6,11 @@ html, body {
   padding: 0px;
 }
 
-body.ProguardWebAppBody {
-  padding: 20px;  
-}
-
-@media only screen and (max-width: 768px) {
-  /* For mobile phones: */
-  body.ProguardWebAppBody {
-    padding: 0px;  
-  }
-}
-
-@media only screen and (min-width: 1300px) {
-  /* For mobile phones: */
-  body.ProguardWebAppBody {
-    width: 1280px;
-  }
+#content_inside {
+  margin-top: 70px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 /* Toolbar area */
@@ -32,6 +21,11 @@ body.ProguardWebAppBody {
   height: 38px;
   margin: 16px;
   width: 36px;
+}
+
+#toolbar {
+  position:fixed;
+  top:0;
 }
 
 md-toolbar h1 {
