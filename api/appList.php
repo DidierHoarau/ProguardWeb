@@ -8,9 +8,12 @@
     $dh  = opendir($config_json['mapping_path']);
     while (false !== ($filename = readdir($dh))) {
         if ($filename!="." and $filename!="..") {
-            array_push($res_array, $filename);            
+            if (strpos($filename,".tar.gz")>0) {
+                array_push($res_array, $filename);
+            }
         }
     }
+    sort($res_array);
 
     // Build JSON and return
     $res_json = json_encode($res_array);
